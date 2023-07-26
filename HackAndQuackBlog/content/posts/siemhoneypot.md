@@ -102,8 +102,8 @@ Interestingly I also got attack alerts from my Wazuh manager meaning someone was
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1690060970571/f58cd414-8b96-47b0-9602-b735cf72ba68.png align="center")
 
-# Final Thoughts
+# Final Thoughts!
 
 Configuring a honeypot to bait attackers as well as SIEM Integration within my network, I learned much about Blue Team Security. Im going to keep on improving the logging system I have created as well adding a ton more honeypots! I do want to find the answer to the question "When is it too much when it comes to honeypots" and hope to find it the more I study and work on my Blue Team Skills.
 
-A big thank you to everyone who helped me get to this point, writing my first blog, and pushing me to always do my best. Sam T, Jim K, Dan W, Willie P, Jamie B, Scott J, Paul Z, Ava K, and so many more thank you so much.
+A big thank you to everyone who helped me get to this point, writing my first blog, and pushing me to always do my best. Sam T, Jim K, Dan W, Willie P, Jamie B, Scott J, Paul Z, Ava K, and so many more thank you so much. 
