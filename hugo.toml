@@ -1,4 +1,4 @@
-baseURL = 'https://HackAndQuack.github.io/'
+baseURL = 'https://github.com/HackAndQuack/HackAndQuack.github.io/'
 languageCode = 'en-us'
 title = 'HackAndQuackBlog'
 theme = "poison"
