@@ -28,25 +28,15 @@ To explain it without all of those difficult words, Cowrie acts like an [SSH](ht
 
 When initially setting up Cowrie I had two main objectives, diverting the hacker from my actual services, and documenting what attacks they are doing. The outcome in the end was that Cowrie was able to deliver on both of those plus so much more! The first thing I did was move my actual SSH port to a different port and then moved my Cowrie service to port 22. (Even though the service identifies as "ibm-db2" in actuality it is my real ssh port")
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690059744153/4dd2a6ad-c951-404d-ae83-809b08d1632d.png align="center")
-
 Once set up, I started configuring the login information.
-
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690059862489/33fabf6b-92d5-491a-9d8b-5b6873d6b090.png align="center")
 
 When configuring the login information I wanted to do something common the attacker may try something such as logging in as root. I also designed it as if an attacker may know I little information about me such as my name Ben and that I love ice cream.
 
 I then decided on creating fake files within this fake environment. I started by putting a fake file name SecretFile and just putting false information on it. Cowrie already setup a user called Phil and I put a fake file within the environment.
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690058076793/473e69f2-dde6-40ca-802c-ef9e84423ddc.png align="center")
-
 This is me creating the "SecretFile"
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690058064605/a65f9a3d-4229-48f4-b291-bedc489db0fb.png align="center")
-
 Once the attacker got into the Cowrie environment and tried messing around with it Cowrie was able to capture those actions and be able to compile them into a log!
-
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690060086265/93e9bb1e-2ef1-42ce-b184-b374cba0334d.png align="center")
 
 # It SIEMs perfect, right?
 
@@ -58,25 +48,17 @@ The first step in incorporating Wazuh into my network was figuring out how to ev
 
 So how does Wazuh collect logs? Wazuh works as a manager to agents. Agents are like little spies in your computers you set up to tattle or secretly tell the manager all the logs within that device, and Wazuh will collect, and manage them. So the first plan is to set up my Rasberry Pi to be an agent and monitor with Wazuh. With just a few simple commands I was able to add it to my collections of agents and configure it.
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690061599295/8b3ef979-7055-4e43-bb09-4978350ec82c.png align="center")
-
 When working with Wazuh I documented what modules I found myself using and my reasonings for why they helped further my understanding in Blue Team.
 
 ## Security Events
 
 With these modules, I was able to view certain threat alerts such as authentication monitoring. What piqued my interest was the timesteps which at the default 30 minutes allowed me to get exact seconds of when certain events happen.
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690060566014/c9e2a89c-b1e1-48bc-abd5-a7fc98b98003.png align="center")
-
 ## Security Configuration Assessment
 
 With this module, I can assess my configurations and compare them to [MITRE's](https://www.mitre.org/) common vulnerabilities to show what I need to fix within my system.
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690015510867/c560c192-c293-46bf-8513-ec474ddd47b6.png align="center")
-
 As you can see the ID vulnerability 29652 "Ensure SSH access is limited" notified me that it failed to pass the vulnerability assessment and explained to me not only how to patch it, but also why this is a vulnerability.
-
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690015698724/fb2ff984-b778-4ffd-9829-c7dd7aa538f4.png align="center")
 
 I was able to patch it and it gave me this response!
 
@@ -84,23 +66,15 @@ I was able to patch it and it gave me this response!
 
 The last Wazuh module I wanted to talk about was Agent Vulnerabilities. Like the SCA (Security Configuration Assessment) it scans your entire agent's machine and will respond if it sees any software or file that can scale from low severity up to critical and will explain how to respond to the alert.
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690015948632/e0dcab50-363a-45bf-aa71-40fffb41a499.png align="center")
-
 Since it was just the honeypot software that was installed on my machine no vulnerabilities were found which is just what I want to hear!
 
 # Taking a Break and Slacking Off
 
 When working on the project I found myself constantly checking back on the event manager checking if it picked up my attack on the honeypot. What I noticed was that it would be better if I could just be notified either on my phone or email that an attack is even going down. I then found out that you can integrate external API's to Wazuh. I started to read up on the documentation and found [Slack](https://slack.com/) and decided to go with implementing it. I first had to create a channel in Slack which my API is going to interact with and then get a [webhook](https://www.redhat.com/en/topics/automation/what-is-a-webhook) and install it within the configuration files of Wazuh.
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690060832267/1397e242-53e6-4815-9157-3f3681d23421.png align="center")
-
 The code was easy to add and after running the script I checked my Slack and got the notification!
 
-(https://cdn.hashnode.com/res/hashnode/image/upload/v1690044959283/f372c101-20d4-4f3f-96cb-c704acea2d6f.png align="center")
-
 Interestingly I also got attack alerts from my Wazuh manager meaning someone was attacking my Linode given IP address. I took the IP address that was attacking me and threw it into [Shodan](https://www.shodan.io/) to see where that attack is coming from.
-
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1690060970571/f58cd414-8b96-47b0-9602-b735cf72ba68.png align="center")
 
 # Final Thoughts
 
